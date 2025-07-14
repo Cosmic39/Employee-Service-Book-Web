@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Online Service Book</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans">
+
+  <!-- Navbar -->
+  <nav class="bg-blue-800 p-4 text-white shadow">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-xl font-bold">Online Service Book</h1>
+      <div class="space-x-4">
+        <a href="#" class="hover:underline">Home</a>
+        <a href="#" class="hover:underline">Profile</a>
+        <a href="#" class="hover:underline">Service Records</a>
+        <a href="Login.html" class="hover:underline">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Employee Info -->
+  <div class="bg-white p-4 rounded shadow mb-6">
+    <h2 class="text-xl font-semibold text-blue-700 mb-4">Employee Information</h2>
+    <div class="flex items-start space-x-6">
+      <img src="#" alt="Profile Photo" class="rounded border w-28 h-28 object-cover" id="profile-preview" />
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full" id="employee-display">
+        <div>
+          <p><strong>Name:</strong> John Doe</p>
+          <p><strong>Emp ID:</strong> 123456</p>
+          <p><strong>Phone:</strong> +91-9876543210</p>
+          <p><strong>Email:</strong> john.doe@example.com</p>
+        </div>
+        <div>
+          <p><strong>Address:</strong> 123, Sector 5, New Delhi, India</p>
+          <p><strong>Blood Group:</strong> B+</p>
+          <p><strong>Emergency Contact:</strong> +91-9988776655</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mx-auto my-8 p-4 bg-white rounded shadow">
+
+    <!-- Employee Information Form -->
+    <div class="grid grid-cols-2 gap-4 mb-6">
+      <input class="p-2 border rounded" id="fullName" placeholder="Full Name" />
+      <input class="p-2 border rounded" id="empId" placeholder="Employee ID" />
+      <input class="p-2 border rounded" id="designation" placeholder="Designation" />
+      <input class="p-2 border rounded" id="department" placeholder="Department" />
+      <input class="p-2 border rounded" id="dob" placeholder="Date of Birth" type="text" />
+      <input class="p-2 border rounded" id="doj" placeholder="Date of Joining" type="text" />
+      <input class="p-2 border rounded" id="email" placeholder="Email" type="email" />
+      <input class="p-2 border rounded" id="phone" placeholder="Phone Number" type="tel" />
+      <input class="p-2 border rounded" id="blood" placeholder="Blood Group" />
+      <input class="p-2 border rounded" id="address" placeholder="Address" />
+      
+      <!-- Upload Profile Photo -->
+      <div class="col-span-2 flex items-center space-x-4">
+        <label for="photoInput" class="text-sm font-semibold">Upload Profile Photo:</label>
+        <input type="file" id="photoInput" class="p-2 border rounded" accept="image/*" />
+      </div>
+    </div>
+
+    <!-- Service History Table -->
+    <h2 class="text-2xl font-bold mb-4">Service History</h2>
+    <table class="min-w-full border">
+      <thead class="bg-gray-200">
+        <tr>
+          <th class="p-2 border">Date</th>
+          <th class="p-2 border">Event Type</th>
+          <th class="p-2 border">Description</th>
+          <th class="p-2 border">Verified By</th>
+          <th class="p-2 border">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white">
+          <td class="p-2 border">2020-07-01</td>
+          <td class="p-2 border">Appointment</td>
+          <td class="p-2 border">Joined as Junior Engineer</td>
+          <td class="p-2 border">HR Admin</td>
+          <td class="p-2 border text-green-600 font-semibold">Verified</td>
+        </tr>
+        <tr class="bg-gray-50">
+          <td class="p-2 border">2021-09-15</td>
+          <td class="p-2 border">Promotion</td>
+          <td class="p-2 border">Promoted to Senior Engineer</td>
+          <td class="p-2 border">Admin</td>
+          <td class="p-2 border text-yellow-600 font-semibold">Pending</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- Document Upload -->
+    <h2 class="text-2xl font-bold mt-8 mb-4">Upload Documents</h2>
+    <div class="border p-4 rounded bg-gray-50">
+      <input type="file" class="p-2 border rounded" id="photoInput" />
+      <button class="ml-2 px-4 py-2 bg-blue-600 text-white rounded">Upload</button>
+    </div>
+
+    <!-- Edit Request Form -->
+    <h2 class="text-2xl font-bold mt-8 mb-4">Edit Request</h2>
+    <form class="space-y-4">
+      <select class="w-full p-2 border rounded">
+        <option>Select Record to Edit</option>
+        <option>Promotion (2021-09-15)</option>
+        <option>Transfer (2022-11-22)</option>
+      </select>
+      <textarea class="w-full p-2 border rounded" placeholder="Describe the change request..."></textarea>
+      <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded">Submit Request</button>
+    </form>
+
+    <!-- Export Buttons -->
+    <div class="bg-white p-4 rounded shadow mb-6 mt-6">
+      <div class="flex items-center gap-4">
+        <button onclick="downloadCSV()" class="mt-4 px-4 py-2 bg-yellow-500 text-white rounded">
+          Download Employee Data (CSV)
+        </button> 
+      </div>
+    </div>
+
+  </div>
+
+  </div>
+
+  <!-- Script to Update Employee Info and Image -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const name = document.getElementById('fullName');
+      const empId = document.getElementById('empId');
+      const designation = document.getElementById('designation');
+      const department = document.getElementById('department');
+      const dob = document.getElementById('dob');
+      const doj = document.getElementById('doj');
+      const email = document.getElementById('email');
+      const phone = document.getElementById('phone');
+      const blood = document.getElementById('blood');
+      const address = document.getElementById('address');
+      const infoSection = document.getElementById('employee-display');
+      const photoInput = document.getElementById('photoInput');
+      const profileImg = document.getElementById('profile-preview');
+
+      function updateInfo() {
+        infoSection.innerHTML =`
+          <div>
+            <p><strong>Name:</strong> ${name.value || 'N/A'}</p>
+            <p><strong>Emp ID:</strong> ${empId.value || 'N/A'}</p>
+            <p><strong>Phone:</strong> ${phone.value || 'N/A'}</p>
+            <p><strong>Email:</strong> ${email.value || 'N/A'}</p>
+          </div>
+          <div>
+            <p><strong>Designation:</strong> ${designation.value || 'N/A'}</p>
+            <p><strong>Department:</strong> ${department.value || 'N/A'}</p>
+            <p><strong>Date of Birth:</strong> ${dob.value || 'N/A'}</p>
+            <p><strong>Date of Joining:</strong> ${doj.value || 'N/A'}</p>
+            <p><strong>Blood Group:</strong> ${blood.value || 'N/A'}</p>
+            <p><strong>Address:</strong> ${address.value || 'N/A'}</p>
+          </div>
+        `;
+      }
+
+      [name, empId, designation, department, dob, doj, email, phone, blood, address].forEach(input => {
+        input.addEventListener('input', updateInfo);
+      });
+
+      photoInput.addEventListener('change', () => {
+        const file = photoInput.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = e => {
+            profileImg.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    });
+    function downloadCSV() {
+    const fields = [
+      { label: "Full Name", value: document.getElementById("fullName").value },
+      { label: "Employee ID", value: document.getElementById("empId").value },
+      { label: "Designation", value: document.getElementById("designation").value },
+      { label: "Department", value: document.getElementById("department").value },
+      { label: "Date of Birth", value: document.getElementById("dob").value },
+      { label: "Date of Joining", value: document.getElementById("doj").value },
+      { label: "Email", value: document.getElementById("email").value },
+      { label: "Phone Number", value: document.getElementById("phone").value },
+      { label: "Blood Group", value: document.getElementById("blood").value },
+      { label: "Address", value: document.getElementById("address").value }
+    ];
+
+    let csvContent = "data:text/csv;charset=utf-8," +
+      fields.map(field => `"${field.label}","${field.value}"`).join("\n");
+
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "employee_info.csv");
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>    
+
+</body>
+</html>
